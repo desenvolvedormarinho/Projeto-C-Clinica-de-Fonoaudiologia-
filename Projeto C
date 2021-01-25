@@ -1,0 +1,786 @@
+
+
+        
+        //Projeto desenvolvido em linguagem C, para funcionamento de uma clínica de fonoaudiologia, onde temos opções para atendentes
+        //fonoaudiólogos e administradores.
+	//Este projeto foi desenvolvido para conclusão do segundo semestre do curso de Análise e Desenvolvimento de sistemas da universidade Paulista Unib Brasilia
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void cabecalho();
+
+void menu01();
+
+void menu02();
+
+void login();
+
+void menu03();
+
+void menu05();
+
+int main(){
+
+    int menu[10],login1[5],menu_atendente,a=0,p=0,menu_atende=0, h[30], ad=0;
+
+    char password[9],sair,lista;
+    
+
+    cabecalho();
+    
+    struct Paciente{
+
+        char nome_p[60];
+        char rg;
+        char cpf;
+        int idade;
+        float altura;
+        float peso;
+        char endereco[100];
+        char queixa[1024];
+        char data[10];
+        char hora[5];
+        char telefone[13];
+        char conv;
+        char convenio[50];
+        char anamnese[1024];
+        char avaliacao[1024];
+        char audio[1024];   
+        char evolucao[1024];
+        char encaminhamento[1024];
+    };
+    
+    struct Paciente paciente[50];
+
+    struct Funcionarios{
+
+        char nome[60];
+        char matricula[8];
+        char cpf[11];
+        char cpfi[8];
+        char senha[8];
+        char senhai[8];
+    };
+
+    struct Funcionarios funcionarios;
+
+    strcpy(funcionarios.cpf, "1");
+
+    strcpy(funcionarios.senha, "1");
+
+    struct ADM{
+
+        char login[8];
+        char logini[8];
+        char senha[8];
+        char senhai[8];
+        char relatorio[1024];
+    };
+    
+    struct ADM adm[8];
+
+    strcpy(adm[a].login, "1");
+
+    strcpy(adm[a].senha, "1");
+
+    struct Fonoaudiologo{
+
+        char login_f[8];
+        char senha_f[8];
+        char nome_f[60];
+        char crefono[12];
+        char cpf[14];
+    };
+
+    struct Fonoaudiologo fonoaudiologo;
+    
+    strcpy(fonoaudiologo.login_f,"1");
+    strcpy(fonoaudiologo.senha_f,"1");
+
+    h[0] = 0;// começo
+    h[1] = 15;// fim
+    
+    do{
+
+        login();//Menu de login.
+        scanf(" %d",&login1[5]);
+        fflush(stdin);
+        sleep(1);
+    
+        switch(login1[5]){
+            
+            case 1:
+
+                menu01(); //Opções de login.
+                scanf(" %d",&menu[0]);
+                fflush(stdin);
+                sleep(1);
+                system("cls");
+
+                switch(menu[0]){ //login Atendente
+                    
+                    case 1:
+                        
+                        do{
+
+                            printf("Usuario: ");
+                            scanf(" %[^\n]s",&funcionarios.cpfi);
+                            fflush(stdin);
+                            sleep(1);
+                            printf("SENHA: ");
+                            scanf(" %[^\n]s",&funcionarios.senhai);
+                            sleep(1);
+                            system("cls");
+                    
+                            if(strcmp(funcionarios.cpfi,funcionarios.cpf) == 0 && strcmp(funcionarios.senhai,funcionarios.senha) == 0){
+                                printf("Login bem sucedido\n");
+                                sleep(1);
+                                system("cls");
+                            
+                            }else{
+
+                                printf("Login ou senha incorreto!\n");
+                                printf("Tente novamente.\n");
+                            }   
+
+                        }while((strcmp(funcionarios.cpfi,funcionarios.cpf) == 0 && strcmp(funcionarios.senhai,funcionarios.senha) != 0) || (strcmp(funcionarios.cpfi,funcionarios.cpf) != 0 && strcmp(funcionarios.senhai,funcionarios.senha) == 0));
+                        
+                        menu03();//Opções do atendente.
+                        scanf("%d",&menu_atendente);
+                        fflush(stdin);
+                        sleep(1);
+                        system("cls");
+                    
+                        switch(menu_atendente){
+
+                            case 1://pronto atendimento
+                                
+                                do{
+                                    
+                                    printf("=====CADASTRO PRONTO ATENDIMENTO=====\n");
+                                    printf("=====================================\n\n");
+                                    sleep(1);
+                                    printf("Nome do paciente:");
+                                    scanf(" %[^\n]s",paciente[p].nome_p);
+                                    fflush(stdin);	
+                                    printf("\nIdade:");
+                                    scanf("%d",&paciente[p].idade);
+                                    fflush(stdin);
+                                    printf("\nEndereco:");
+                                    scanf(" %[^\n]s",&paciente[p].endereco);
+                                    fflush(stdin);
+                                    printf("\nTelefone:");
+                                    scanf(" %[^\n]s",paciente[p].telefone);
+                                    fflush(stdin);
+                                    printf("\nPossui convenio? (s/n)");
+                                    scanf(" %c",&paciente[p].conv);
+                                    fflush(stdin);
+                                    sleep(1);
+
+                                    if(paciente[p].conv == 's'){
+
+                                        printf("Informe convenio:");
+                                        scanf(" %[^\n]s",&paciente[p].convenio);
+                                        fflush(stdin);
+                                        sleep(1);
+                                        printf("Emitir guia de autorizacao\n\n");
+                                        sleep(1);
+                                        system("cls");
+                                        printf("Aguarde.");
+                                        sleep(1);
+                                        system("cls");
+                                        printf("Aguarde..");
+                                        sleep(1);
+                                        system("cls");
+                                        printf("Aguarde...\n");
+                                        sleep(1);
+                                        
+                                    }else{
+
+                                        printf("Emitir guia para pagamanto\n");
+                                        sleep(1);
+                                        system("cls");
+                                        printf("Aguarde.");
+                                        sleep(1);
+                                        system("cls");
+                                        printf("Aguarde..");
+                                        sleep(1);
+                                        system("cls");
+                                        printf("Aguarde...");
+                                        sleep(1);
+                                        printf("\nCADASTRO REALIZADO COM SUCESSO!!\n\n");
+                                        sleep(1);
+                                    
+                                    }
+
+                                    system("cls");
+                                    printf("\nCADASTRAR NOVO PACIENTE? (s/n)");
+                                    scanf(" %c",&sair);
+                                    fflush(stdin); 
+                                    sleep(1);
+                            
+                                    p++; 
+
+                                }while(sair !='n');
+
+                                if(sair == 'n'){
+
+                                    system("cls");
+                                    printf("Aguarde.");
+                                    sleep(1);
+                                    system("cls");
+                                    printf("Aguarde..");
+                                    sleep(1);
+                                    system("cls");
+                                    printf("Aguarde...");
+                                    sleep(1);
+
+                                } 
+
+                            break;
+
+                            case 2://agendamento de consulta
+                                
+                                do{
+
+                                    printf("|==================================|\n");
+                                    printf("|     AGENDAMENTO DE CONSULTAS     |\n");
+                                    printf("|==================================|\n\n");
+                                    sleep(1);
+                                    printf("Nome do paciente:");
+                                    scanf(" %[^\n]s",paciente[p].nome_p);
+                                    fflush(stdin);	
+                                    printf("\nIdade:");
+                                    scanf("%d",&paciente[p].idade);
+                                    fflush(stdin);
+                                    printf("\nEndereco:\n");
+                                    scanf("%[^\n]s",&paciente[p].endereco);
+                                    fflush(stdin);
+                                    printf("Telefone:");
+                                    scanf("%[^\n]s",paciente[p].telefone);
+                                    fflush(stdin);
+                                    printf("\nData consulta:\n");
+                                    scanf("%[^\n]s",&paciente[p].data);
+                                    fflush(stdin);
+                                    printf("Hora consulta:\n");
+                                    scanf("%[^\n]s",paciente[p].hora);
+                                    fflush(stdin);
+                                    printf("Agendar novo paciente?(s/n)");
+                                    scanf(" %c",&sair);
+                                    fflush(stdin);
+                                    sleep(1);
+                                    system("cls");
+
+                                }while(sair=='s');
+
+                                if(sair == 's'){
+
+                                    printf("\n======CONSULTA AGENDADA COM SUCESSO!=====\n");
+                                }           
+                            break;
+
+                            case 3://cancelamento de consulta
+                                
+                                do{
+
+                                    printf("|==================================|\n");
+                                    printf("|====CANCELAMENTO DE CONSULTAS=====|\n");
+                                    printf("|==================================|\n\n");
+                                    sleep(1);
+                                    printf("Nome:");
+                                    scanf(" %[^\n]s",paciente[p].nome_p);
+                                    fflush(stdin);	
+                                    printf("Data consulta:");
+                                    scanf("%[^\n]s",&paciente[p].data);
+                                    fflush(stdin);
+                                    printf("Hora consulta:");
+                                    scanf("%[^\n]s",paciente[p].hora);
+                                    fflush(stdin);
+                                    sleep(1);
+                                    system("cls");
+                                    printf("Nome:%s\n\nData:%s \n\nHora:%shs.\n\n",paciente[p].nome_p,paciente[p].data,paciente[p].hora);
+                                    printf("CANCELAR CONSULTA?(S/N)");
+                                    scanf(" %c",&sair);
+                                    fflush(stdin);
+                                    sleep(1);
+                                    system("cls");
+
+                                }while(sair!='s');
+
+                                if(sair =='s'){
+
+                                    printf("|============================|\n");
+                                    printf("|      CONSULTA CANCELADA    |\n");
+                                    printf("|============================|\n");
+                                }
+
+                            break;
+
+                            case 4://alterar dados  
+
+                                do{
+
+                                    printf("|============================|\n");
+                                    printf("|        ALTERAR DADOS       |\n");
+                                    printf("|============================|\n\n");
+                                    printf("Nome do paciente:");
+                                    scanf(" %[^\n]s",paciente[p].nome_p);
+                                    fflush(stdin);	
+                                    printf("\nIdade:");
+                                    scanf("%d",&paciente[p].idade);
+                                    fflush(stdin);
+                                    printf("Endereco:");
+                                    scanf("%[^\n]s",&paciente[p].endereco);
+                                    fflush(stdin);
+                                    printf("Telefone:");
+                                    scanf("%d",paciente[p].telefone);
+                                    sleep(1);
+                                    printf("\n");
+                                    sleep(1);
+                                    system("cls");
+                                    printf("=====DADOS ALTERADOS COM SUCESSO=====!\n");
+                                    printf("Sair? (s/n)");
+                                    scanf(" %c",&sair);
+                                    fflush(stdin);
+
+                                }while(sair != 's');
+                                
+                            break;
+
+                            case 5://Lista de pacientes cadastrados.
+                                
+                                do{
+
+                                    printf("======PACIENTES CADASTRADOS======\n\n");
+                                   
+                                    for(h[2]=h[0];h[2]<=h[1];h[2]++){
+
+                                        printf("\n[%d] -- %s\n\n",h[2],paciente[h[2]].nome_p);   
+
+                                    }
+                                    printf("sair? (s/n)");
+                                    scanf(" %c",&sair);
+                                    fflush(stdin);
+                                    system("cls");
+                                
+                                }while(sair == 'n');
+                                
+                            break;
+
+                            case 6://sair
+                                
+                                do{
+                                   
+                                    printf("SAIR?(s/n)");
+                                    scanf(" %c",&sair);
+                                    fflush(stdin);
+
+                                }while(sair !='s');
+
+                            break;    
+                        
+                        }
+                
+                    break;  
+
+                    case 2:  //Login Fonoaudiologo
+
+                        do{
+                            printf("Usuario:  ");
+                            scanf(" %[^\n]s",&fonoaudiologo.login_f);
+                            fflush(stdin);
+                            sleep(1);
+                            printf("SENHA:  ");
+                            scanf(" %[^\n]s",&fonoaudiologo.senha_f);
+                            fflush(stdin);
+                            sleep(1);
+                            system("cls");
+
+                            if(strcmp(fonoaudiologo.login_f,fonoaudiologo.senha_f) == 0 && strcmp(fonoaudiologo.senha_f,fonoaudiologo.senha_f) == 0){
+
+                                printf("Login efetuado com sucesso!!!\n\n");
+                                sleep(1);
+                                system("cls");
+                                printf("=====INFORME A OPCAO DESEJADA=====");
+                                sleep(1);
+                                menu02();
+                                scanf("%d\n",&menu[3]);
+                                fflush(stdin);
+
+                                switch(menu[3]){ //Atendimento fonoaudiologo
+
+                                    case 1: //Iniciar Atendimento
+                                       
+                                        do{
+                                           
+                                            do{
+                                                system("cls");
+
+                                                for(h[2]=h[0];h[2]<=h[1];h[2]++){
+
+                                                    printf("\n[%d] -- %s",h[2],paciente[h[2]].nome_p);
+                                                }
+
+                                                printf("\n\t\t< (a)--------(b) >\n\n\tPressione (c) para selecionar paciente");
+                                                scanf(" %c",&lista);
+                                                fflush(stdin);
+
+                                                if(lista == 'b'){
+                                                    h[0] = h[0] + 15;
+                                                    h[1] = h[1] + 15;
+                                                } 
+
+                                                if(lista == 'a'){
+                                                    h[0] = h[0] - 15;
+                                                    h[1] = h[1] - 15;
+                                                }
+
+                                            }while(lista != 'c');
+
+                                            printf("\nSelecione o indice do paciente: ");
+                                            scanf("%d",&h[20]);
+                                            fflush(stdin);
+                                            printf(" %s",paciente[h[20]].nome_p);
+                                            printf("%d\n");
+                                            printf("QUEIXAS:");
+                                            scanf(" %c",&paciente[h[20]].queixa);
+                                            fflush(stdin);
+                                            printf("sair? (s/n)");
+                                            scanf(" %c",&sair);
+                                            fflush(stdin);
+
+                                        }while(sair=='n');
+                                       
+                                    break;
+
+                                    case 2://Anamnese
+                                        
+                                        do{
+
+                                            printf("Anamnese do paciente:");
+                                            scanf("%[^\n]s",&paciente[p].anamnese);
+                                            fflush(stdin);
+                                            printf("Encerrar anamnese?");
+                                            scanf(" %c",sair);
+                                            fflush(stdin);
+
+                                        }while(sair!='s');
+                                        
+                                    break; 
+
+                                    case 3://Avaliacao Fonoaudiologica
+                                       
+                                        do{
+
+                                            printf("=======AVALIACAO FONOAUDIOLOGICA======\n");
+                                            scanf("%[^\n]s",&paciente[p].avaliacao);
+                                            fflush(stdin);
+                                            printf("Encerrar avaliacao?(s/n) ");
+                                            scanf(" %c",sair);
+                                            fflush(stdin);
+
+                                        }while(sair=='n');
+
+                                    break;
+
+                                    case 4: //Exames audiometria.
+                                        
+                                        do{
+
+                                            printf("======EXAMES AUDIOMETRIA======\n\n");
+                                            printf("Após a realizacao dos exames informe todas as alteracoes aqui: \n");
+                                            scanf("%[^\n]s",&paciente[p].audio);
+                                            fflush(stdin);
+                                            printf("Encerrar?(s/n)\n ");
+                                            scanf(" %c",sair);
+                                            fflush(stdin);
+                                            
+                                        }while(sair=='n');
+
+                                    break;
+
+                                    case 5://Encaminhamentos
+                                        
+                                        do{
+                                            
+                                            printf("=======ENCAMINHAMENTOS=======\n\n");
+                                            printf("Paciente: ");
+                                            scanf(" %[^\n]s",&paciente[p].nome_p);
+                                            printf("Solicito para o paciente %s os seguintes exames:  \n",paciente[p].nome_p);
+                                            scanf(" %[^\n]s",&paciente[p].encaminhamento);
+                                            fflush(stdin);
+                                            printf("Encerrar?(s/n) \n");
+                                            scanf(" %c",sair);
+                                            fflush(stdin);
+                                            
+                                        }while(sair=='n');
+
+                                    break;
+
+                                    case 6: //Evolucao de Atendimento.
+                                        
+                                        do{
+
+                                            printf("====EVOLUCAO DE ATENDIMENTO====\n");
+                                            printf("Digite aqui: ");
+                                            scanf(" %[^\n]s",&paciente[p].evolucao);
+                                            fflush(stdin);
+                                            printf("Encerrar?(s/n)\n");
+                                            scanf(" %c",sair);
+                                            fflush(stdin);
+
+                                        }while(sair=='n');
+
+                                    break;
+
+                                    case 7: //sair
+                                        
+                                        do{
+                                            
+                                            printf("Encerrar?(s/n)\n");
+                                            scanf(" %c",sair);
+                                            fflush(stdin);
+
+                                        }while(sair=='n');
+
+                                    break; 
+                                    
+                                }
+                                
+                            }   
+
+                        }while( sair !='s');
+                                           
+                    break;
+
+                    default:
+
+                        do{
+
+                            printf("sair?(s/n) ");
+                            scanf(" %c",&sair);
+                        
+                        }while(sair == 'n');
+                    break;
+    
+                }  
+
+            break;         
+
+            case 2://login admin
+
+                do{
+                    system("cls");
+                    printf("=========== BEM VINDO ================|\n\n");
+                    printf("LOGIN: ");
+                    scanf(" %[^\n]s",&adm[a].logini);
+                    fflush(stdin);
+                    printf("SENHA: ");
+                    scanf(" %[^\n]s",&adm[a].senhai);
+                    fflush(stdin);
+
+                    if(strcmp(adm[a].logini,adm[a].senhai) == 0 && strcmp(adm[a].senhai,adm[a].senha) == 0){
+
+                        printf("\nLOGIN EFETUADO COM SUCESSO\n");
+                        sleep(2);
+                        system("cls");
+                        printf("=====INFORME A OPCAO DESEJADA=====\n");
+                        sleep(1);
+                        
+                        menu05();//menu admin
+                        scanf("%d",&menu[1]);
+                        fflush(stdin);
+                        system("cls");
+
+                        switch(menu[1]){
+
+                            case 1://Cadastrar funcionario
+                               
+                                printf("=====CADASTRAR FUNCIONARIO=====\n");
+                                printf("Nome:");
+                                scanf("%[^\n]s",&funcionarios.nome);
+                                fflush(stdin);
+                                printf("CPF:");
+                                scanf("%[^\n]s",&funcionarios.cpf);
+                                fflush(stdin);
+                                sleep(1);
+                                system("cls");
+                                sleep(1);
+                                printf("Aguarde.");
+                                sleep(1);
+                                system("cls");
+                                printf("Aguarde..");
+                                sleep(1);
+                                system("cls");
+                                printf("Aguarde...");
+                                sleep(1);
+                                system("cls");
+                                printf("====CADASTRO REALIZADO COM SUCESSO!====");
+
+                            break;
+
+                            case 2://Cadastrar fonoaudiologo
+                                
+                                printf("======CADASTRAR FONOAUDIOLOGO=====\n\n");
+                                printf("Nome: ");
+                                scanf("%[^\n]s",&fonoaudiologo.nome_f);
+                                fflush(stdin);
+                                printf("CPF: ");
+                                scanf("%[^\n]s",fonoaudiologo.cpf);
+                                fflush(stdin);
+                                printf("CREFONO:");//Registro de fonoaudiologos
+                                scanf(" %[^\n]s",&fonoaudiologo.crefono);
+                                fflush(stdin);
+                                sleep(1);
+                                system("cls");
+                                sleep(1);
+                                printf("Aguarde.");
+                                sleep(1);
+                                system("cls");
+                                printf("Aguarde..");
+                                sleep(1);
+                                system("cls");
+                                printf("Aguarde...");
+                                sleep(1);
+                                system("cls");
+                                printf("====CADASTRO REALIZADO COM SUCESSO!====");
+                                sleep(1);
+                                system("cls");
+
+                            break;
+
+                            case 3://RELATORIO DE DADOS
+                            
+                                do{
+
+                                    printf("INICIAR RELATORIO DE DADOS:\n ");
+                                    scanf("%[^\n]s",&adm[ad].relatorio);
+                                    fflush(stdin);
+                                    printf("Salvar relatorio? (s/n)  ");
+                                    scanf(" %c",&sair);
+                                    fflush(stdin);
+                                    sleep(1);
+                                    system("cls");
+                                    printf("Aguarde.");
+                                    sleep(1);
+                                    system("cls");
+                                    printf("Aguarde..");
+                                    sleep(1);
+                                    system("cls");
+                                    printf("Aguarde...\n");
+                                    sleep(1);
+                                      
+                                }while(sair == 'n');
+
+                                if(sair == 's'){
+                                    
+                                    printf("Relatorio Salvo com sucesso!!!!\n\n");
+                                    sleep(1);
+                                    printf("============ AVISO ==========\n\n");
+                                    sleep(1);
+                                    printf("Todos os relatorios sao armazenados na Matriz\n\n");
+                                    
+                                }                                   
+                                                                
+                            break;
+
+                            case 4://SAIR
+                                
+                                do{
+                                    
+                                    printf("sair?(s/n) ");
+                                    scanf(" %c",&sair);
+                                    fflush(stdin);
+                                    system("cls");
+
+                                }while(sair != 's');
+
+                            break;
+                        }
+
+                    }else{
+
+                        printf("Login/senha incorreto");
+                    }
+                }while((strcmp(adm[a].logini,adm[a].login) == 0 && strcmp(adm[a].senhai,adm[a].senha) != 0) || (strcmp(adm[a].logini,adm[a].login) != 0 && strcmp(adm[a].senhai,adm[a].senha) == 0));
+            
+            break;
+        
+        }
+
+        printf("\nEncerrar programa? (s/n)");
+        scanf(" %c",&sair);
+        fflush(stdin);
+        system("cls");
+
+    }while(sair == 'n');
+
+    return 0;
+
+}
+
+void cabecalho ( ) {
+
+    printf ("\t\t|--------------------------------------| \n " ) ;
+    printf ("\t\t|------        --------          ------| \n " ) ;
+    printf ("\t\t|-----------   FONOCLIN   -------------| \n " ) ;
+    printf ("\t\t|------------fONOAUDIOLOGIA------------| \n " ) ;
+    printf ("\t\t|--------------------------------------| \n \n " ) ;    
+} 
+
+void login(){
+
+    printf("ESCOLHA  A OPCAO DESEJADA:\n");
+    printf("1.ATENDENTE / FONOAUDIOLOGO");
+    printf("\n");
+    printf("2.ADMINISTRADOR\n\n");
+    sleep(1);
+    
+}
+
+void menu01(){//opções do login.
+   
+    printf("\n|-------------------------------------------------------------|\n");
+    printf("|------------------1. ATENDENTE-------------------------------|\n");
+    printf("|------------------2. FONOAUDIOLOGO---------------------------|\n");
+    printf("|------------------3. SAIR------------------------------------|\n");
+    printf("|-------------------------------------------------------------|\n");
+
+}
+
+void menu02(){//atendimento Fonoaudiólogo
+
+    printf("\n\t\t|-------------------------------------------|");
+    printf("\n\t\t|       1.  Iniciar Atendimento             |");
+    printf("\n\t\t|       2.  Anamnese                        |");
+    printf("\n\t\t|       3.  Avaliacao Fonoaudiologica       |");
+    printf("\n\t\t|       4.  Exames audiometria              |");
+    printf("\n\t\t|       5.  Encaminhamentos                 |");
+    printf("\n\t\t|       6.  Evolucao de tendimento          |");
+    printf("\n\t\t|       7.  Sair                            |");
+    printf("\n\t\t|-------------------------------------------|");
+        
+}
+
+void menu03(){//Opções do atendente.
+    printf("\n|---------------------------------------------|");
+    printf("\n|              1. PRONTO ATENDIMENTO          |");
+    printf("\n|              2. AGENDAR CONSULTA            |");
+    printf("\n|              3. CANCELAMENTO DE CONSULTA    |");
+    printf("\n|              4. ALTERAR DADOS               |");
+    printf("\n|              5. LISTA DE PACIENTES          |");
+    printf("\n|              6. SAIR                        |");
+    printf("\n|---------------------------------------------|\n");
+}
+
+void menu05(){// menu admin
+    printf("\n|-------------------------------------------------------------|");
+    printf("\n|                  1. CADASTRAR FUNCIONARIO                   |");
+    printf("\n|                  2. CADASTRAR FONOAUDIOLOGO                 |");
+    printf("\n|                  3. RELATORIO DE DADOS                      |");
+    printf("\n|                  4. SAIR                                    |");
+    printf("\n|-------------------------------------------------------------|\n");
+}
